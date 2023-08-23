@@ -1,5 +1,7 @@
-import React, { useState, useCallback } from 'react';
-import AppLayout from '../components/AppLayout';
+'use client'
+
+import { useState, useCallback } from 'react';
+import AppLayout from '../../components/AppLayout';
 import { Button, Checkbox, Form, Input } from 'antd';
 
 const SignUp = () => {
@@ -21,12 +23,9 @@ const SignUp = () => {
     return [value, handler];
   })
 
-  // const [userId, setUserId] = useState("");
-  // const [nickname, setNickname] = useState("");
   const [userId, onChangeUserId] = useInputController("");
   const [nickname, onChangeNickname] = useInputController("");
   const [password, onChangePassword] = useInputController("");
-  // const [confirmPassword, setConfirmPassword] = useState("");
   const [confirmPassword, onChangePasswordConfirm] = useErrorCheckController(
     "", 
     (value) => setPasswordError(value != password)
@@ -37,9 +36,6 @@ const SignUp = () => {
 
 
   const onSubmit = useCallback(() => {
-    console.log({
-      userId, password, confirmPassword, nickname, term
-    })
     if (password !== confirmPassword) {
       return setPasswordError(true);
     }
@@ -48,20 +44,7 @@ const SignUp = () => {
       return setTermError(true);
     }
   }, [password, confirmPassword, term]);
-  // const onChangeUserId = (event) => {
-  //   console.log(event.target.value);
-  //   setUserId(event.target.value);
-  // };
-  // const onChangeNickname = (event) => {
-  //   setNickname(event.target.value);
-  // };
-  // const onChangePassword = (event) => {
-  //   setPassword(event.target.value);
-  // };
-  // const onChangePasswordConfirm = (event) => {
-  //   setPasswordError(event.target.value !== password);
-  //   setConfirmPassword(event.target.value);
-  // };
+
   const onChangeTerm = useCallback((event) => {
     setTermError(!event.target.checked);
     setTerm(event.target.checked);
